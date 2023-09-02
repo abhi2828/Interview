@@ -1,0 +1,7 @@
+.pointer,label,input[type="radio"]{
+  cursor: pointer;
+}
+
+input[type="radio"]{
+  border: 1px solid #392fff;
+}
