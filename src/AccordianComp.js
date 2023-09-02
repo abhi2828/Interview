@@ -45,7 +45,11 @@ function AccordianComp(props) {
     console.log('id', id)
     if (open === id) {
       setOpen();
-    } else {
+    }
+    if (id === 1) {
+      setOpen((prevState) => (prevState === 1 ? null : 1));
+    }
+     else {
       setOpen(id);
     }
   };
@@ -152,15 +156,15 @@ function AccordianComp(props) {
   console.log('activeMode', activeMode)
   return (
     <>
-      <Accordion open={open} toggle={()=>toggle()}>
+      <Accordion open={open} toggle={()=>toggle(open)}>
         {QuestionArray.map((e, i) => (
           <AccordionItem key={i}>
             <AccordionHeader targetId={i + 1}>Accordion Item {i + 1}</AccordionHeader>
             <AccordionBody accordionId={i + 1}>
               <form onSubmit={handleSubmit(() => onSubmit())}>
                 {
-                  e.map(({ question, labelId, label, sliceIndex, type }) => <div key={type}>
-                      <p>{question}</p>
+                  e.map(({ question, labelId, label, sliceIndex, type }) => <div key={type} className='mb-2'>
+                      <p className='mb-1'>{question}</p>
                       <label className='me-2' htmlFor={labelId[0].Q1Yes}>
                         <input
                           {...register(type)}
@@ -200,84 +204,7 @@ function AccordianComp(props) {
                     </div>
                   )
                 }
-                {/* <div>
-                  <p>Is cricket a popular sport in many countries?</p>
-                  <label className='me-2' htmlFor="Q2-Yes">
-                    <input
-                      {...register("Q2")}
-                      type="radio"
-                      value="Yes"
-                      id="Q2-Yes"
-                      checked={activeMode.Q2 === 'Yes' ? true : false}
-                      onChange={() => handleCheckBox('Yes', 'Q2',3)}
-                      className='me-1'
-                    />
-                    Yes
-                  </label>
-                  <label className='me-2' htmlFor="Q2-No">
-                    <input
-                      {...register("Q2")}
-                      type="radio"
-                      value="No"
-                      id="Q2-No"
-                      checked={activeMode.Q2 === 'No' ? true : false}
-                      onChange={() => handleCheckBox('No', 'Q2',3)}
-                      className='me-1'
-                    />
-                    No
-                  </label>
-                  <label className='me-2' htmlFor="Q2-NA">
-                    <input
-                      {...register("Q2")}
-                      type="radio"
-                      value="NA"
-                      id="Q2-NA"
-                      checked={activeMode.Q2 === 'NA' ? true : false}
-                      onChange={() => handleCheckBox('NA', 'Q2',3)}
-                      className='me-1'
-                    />
-                    NA
-                  </label>
-                </div>
-                <div>
-                  <p>Is cricket a popular sport in many countries?</p>
-                  <label className='me-2' htmlFor="Q3-Yes">
-                    <input
-                      {...register("Q3")}
-                      type="radio"
-                      value="Yes"
-                      id="Q3-Yes"
-                      checked={activeMode.Q3 === 'Yes' ? true : false}
-                      onChange={() => handleCheckBox('Yes', 'Q3',3)}
-                      className='me-1'
-                    />
-                    Yes
-                  </label>
-                  <label className='me-2' htmlFor="Q3-No">
-                    <input
-                      {...register("Q3")}
-                      type="radio"
-                      value="No"
-                      id="Q3-No"
-                      checked={activeMode.Q3 === 'No' ? true : false}
-                      onChange={() => handleCheckBox('No', 'Q3',3)}
-                      className='me-1'
-                    />
-                    No
-                  </label>
-                  <label className='me-2' htmlFor="Q3-NA">
-                    <input
-                      {...register("Q3")}
-                      type="radio"
-                      value="NA"
-                      id="Q3-NA"
-                      checked={activeMode.Q3 === 'NA' ? true : false}
-                      onChange={() => handleCheckBox('NA', 'Q3',3)}
-                      className='me-1'
-                    />
-                    NA
-                  </label>
-                </div> */}
+                
                 {active ? <div className="d-flex justify-content-left mt-3">
                   <Button className='me-2' color="primary" outline type="submit">
                     Submit
@@ -287,134 +214,6 @@ function AccordianComp(props) {
                   </Button>
                 </div> : <></>}
               </form>
-
-              {/* <form onSubmit={handleSubmit((e)=>onSubmit(e))}>
-                <div>
-                  <p>Is cricket a popular sport in many countries?</p>
-                  <label className='me-2' htmlFor="Q1-Yes">
-                    <input
-                      {...register("Q1")}
-                      type="radio"
-                      value="Yes"
-                      id="Q1-Yes"
-                      checked={activeMode.Q1 === 'Yes' ? true : false}
-                      onChange={() => handleCheckBox('Yes', 'Q1',3)}
-                      className='me-1'
-                    />
-                    Yes
-                  </label>
-                  <label className='me-2' htmlFor="Q1-No">
-                    <input
-                      {...register("Q1")}
-                      type="radio"
-                      value="No"
-                      id="Q1-No"
-                      checked={activeMode.Q1 === 'No' ? true : false}
-                      onChange={() => handleCheckBox('No', 'Q1',3)}
-                      className='me-1'
-                    />
-                    No
-                  </label>
-                  <label className='me-2' htmlFor="Q1-NA">
-                    <input
-                      {...register("Q1")}
-                      type="radio"
-                      value="NA"
-                      id="Q1-NA"
-                      checked={activeMode.Q1 === 'NA' ? true : false}
-                      onChange={() => handleCheckBox('NA', 'Q1',3)}
-                      className='me-1'
-                    />
-                    NA
-                  </label>
-                </div>
-                <div>
-                  <p>Is cricket a popular sport in many countries?</p>
-                  <label className='me-2' htmlFor="Q2-Yes">
-                    <input
-                      {...register("Q2")}
-                      type="radio"
-                      value="Yes"
-                      id="Q2-Yes"
-                      checked={activeMode.Q2 === 'Yes' ? true : false}
-                      onChange={() => handleCheckBox('Yes', 'Q2',3)}
-                      className='me-1'
-                    />
-                    Yes
-                  </label>
-                  <label className='me-2' htmlFor="Q2-No">
-                    <input
-                      {...register("Q2")}
-                      type="radio"
-                      value="No"
-                      id="Q2-No"
-                      checked={activeMode.Q2 === 'No' ? true : false}
-                      onChange={() => handleCheckBox('No', 'Q2',3)}
-                      className='me-1'
-                    />
-                    No
-                  </label>
-                  <label className='me-2' htmlFor="Q2-NA">
-                    <input
-                      {...register("Q2")}
-                      type="radio"
-                      value="NA"
-                      id="Q2-NA"
-                      checked={activeMode.Q2 === 'NA' ? true : false}
-                      onChange={() => handleCheckBox('NA', 'Q2',3)}
-                      className='me-1'
-                    />
-                    NA
-                  </label>
-                </div>
-                <div>
-                  <p>Is cricket a popular sport in many countries?</p>
-                  <label className='me-2' htmlFor="Q3-Yes">
-                    <input
-                      {...register("Q3")}
-                      type="radio"
-                      value="Yes"
-                      id="Q3-Yes"
-                      checked={activeMode.Q3 === 'Yes' ? true : false}
-                      onChange={() => handleCheckBox('Yes', 'Q3',3)}
-                      className='me-1'
-                    />
-                    Yes
-                  </label>
-                  <label className='me-2' htmlFor="Q3-No">
-                    <input
-                      {...register("Q3")}
-                      type="radio"
-                      value="No"
-                      id="Q3-No"
-                      checked={activeMode.Q3 === 'No' ? true : false}
-                      onChange={() => handleCheckBox('No', 'Q3',3)}
-                      className='me-1'
-                    />
-                    No
-                  </label>
-                  <label className='me-2' htmlFor="Q3-NA">
-                    <input
-                      {...register("Q3")}
-                      type="radio"
-                      value="NA"
-                      id="Q3-NA"
-                      checked={activeMode.Q3 === 'NA' ? true : false}
-                      onChange={() => handleCheckBox('NA', 'Q3',3)}
-                      className='me-1'
-                    />
-                    NA
-                  </label>
-                </div>
-                {active ? <div className="d-flex justify-content-left mt-3">
-                  <Button className='me-2' color="primary" outline type="submit">
-                    Submit
-                  </Button>{" "}
-                  <Button color="danger" outline>
-                    Cancel
-                  </Button>
-                </div> : <></>}
-              </form> */}
             </AccordionBody>
           </AccordionItem>
         ))}
